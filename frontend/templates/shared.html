@@ -1,0 +1,94 @@
+```html
+{% extends "base.html" %}
+
+{% block title %}Shared with me | TrustVault{% endblock %}
+{% block breadcrumb %}Shared with me{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <p class="eyebrow">COLLABORATION</p>
+        <h1>Shared with me</h1>
+        <p class="muted">
+            Files other people have shared with your account.
+        </p>
+    </div>
+</div>
+
+<section class="panel">
+
+    <div class="table-scroll">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>DOCUMENT</th>
+                    <th>OWNER</th>
+                    <th>PERMISSION</th>
+                    <th>SHARED ON</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>
+                        <span class="file-type pdf">PDF</span>
+                        <b>Team Handbook.pdf</b>
+                    </td>
+
+                    <td>Priya Sharma</td>
+
+                    <td>
+                        <span class="badge blue">READ</span>
+                    </td>
+
+                    <td>Oct 30, 2026</td>
+
+                    <td>
+                        <a
+                            href="/documents/1"
+                            class="button secondary"
+                        >
+                            Open
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <span class="file-type doc">DOC</span>
+                        <b>Design Review.docx</b>
+                    </td>
+
+                    <td>Ravi Kumar</td>
+
+                    <td>
+                        <span class="badge purple">EDIT</span>
+                    </td>
+
+                    <td>Oct 26, 2026</td>
+
+                    <td>
+                        <a
+                            href="/documents/2"
+                            class="button secondary"
+                        >
+                            Open
+                        </a>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}
+```

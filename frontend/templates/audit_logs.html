@@ -1,0 +1,129 @@
+```html
+{% extends "base.html" %}
+{% block title %}Audit trail | TrustVault{% endblock %}
+{% block breadcrumb %}Audit trail{% endblock %}
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <p class="eyebrow">ACCOUNTABILITY</p>
+        <h1>Audit trail</h1>
+        <p class="muted">A record of successful actions and denied attempts.</p>
+    </div>
+    <button class="button secondary" onclick="window.print()">Print view</button>
+</div>
+
+<div class="stats-grid three-stats">
+    <article class="stat-card">
+        <span>Events today</span>
+        <strong>18</strong>
+        <small>Recorded actions</small>
+    </article>
+    <article class="stat-card">
+        <span>Successful</span>
+        <strong>16</strong>
+        <small>Allowed operations</small>
+    </article>
+    <article class="stat-card">
+        <span>Denied attempts</span>
+        <strong>02</strong>
+        <small>Blocked operations</small>
+    </article>
+</div>
+
+<section class="panel">
+    <div class="toolbar">
+        <input id="auditSearch" class="search" placeholder="⌕ Search activity...">
+        <select>
+            <option>All events</option>
+            <option>Download</option>
+            <option>Permission changed</option>
+            <option>Access denied</option>
+        </select>
+    </div>
+
+    <div class="table-scroll">
+        <table id="auditTable">
+            <thead>
+                <tr>
+                    <th>TIME</th>
+                    <th>ACTOR</th>
+                    <th>EVENT</th>
+                    <th>DOCUMENT</th>
+                    <th>RESULT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nov 2, 10:18 AM</td>
+                    <td>Ravi Kumar</td>
+                    <td>Document download</td>
+                    <td>Research Notes.docx</td>
+                    <td><span class="badge green">Allowed</span></td>
+                </tr>
+                <tr>
+                    <td>Nov 2, 09:52 AM</td>
+                    <td>Vishnu</td>
+                    <td>Document upload</td>
+                    <td>Project Proposal.pdf</td>
+                    <td><span class="badge green">Allowed</span></td>
+                </tr>
+                <tr>
+                    <td>Nov 1, 04:32 PM</td>
+                    <td>Vishnu</td>
+                    <td>Permission granted</td>
+                    <td>Budget Report.pdf</td>
+                    <td><span class="badge green">Allowed</span></td>
+                </tr>
+                <tr>
+                    <td>Nov 1, 02:05 PM</td>
+                    <td>Unknown user</td>
+                    <td>Document access attempt</td>
+                    <td>Document #104</td>
+                    <td><span class="badge red">Denied</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h2>Available documents</h2>
+            <p class="muted">Open a document associated with your workspace.</p>
+        </div>
+    </div>
+
+    <div class="table-scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>DOCUMENT</th>
+                    <th>OWNER</th>
+                    <th>CATEGORY</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for document in documents %}
+                <tr>
+                    <td>{{ document.name }}</td>
+                    <td>{{ document.owner }}</td>
+                    <td>{{ document.category }}</td>
+                    <td>
+                        <a href="/documents/{{ document.id }}" class="button primary small">Open</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<p class="warning-note">
+    Audit logs should be append-only in the application. Normal users must not be able to update or delete them.
+</p>
+
+{% endblock %}
+```

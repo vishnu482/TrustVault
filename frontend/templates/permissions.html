@@ -1,0 +1,133 @@
+```html
+{% extends "base.html" %}
+{% block title %}Access management | TrustVault{% endblock %}
+{% block breadcrumb %}Access management{% endblock %}
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <p class="eyebrow">CONTROL ACCESS</p>
+        <h1>Access management</h1>
+        <p class="muted">Grant named users specific permissions and revoke them when needed.</p>
+    </div>
+</div>
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h2>Current permissions</h2>
+            <p class="muted">Illustrative sample records.</p>
+        </div>
+    </div>
+
+    <div class="table-scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>DOCUMENT</th>
+                    <th>PERSON</th>
+                    <th>PERMISSION</th>
+                    <th>STATUS</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Research Notes.docx</td>
+                    <td>Ravi Kumar<br><small>ravi@example.com</small></td>
+                    <td><span class="badge blue">READ</span></td>
+                    <td><span class="badge green">Active</span></td>
+                    <td><button class="button danger small" data-revoke>Revoke</button></td>
+                </tr>
+                <tr>
+                    <td>Research Notes.docx</td>
+                    <td>Priya Sharma<br><small>priya@example.com</small></td>
+                    <td><span class="badge purple">EDIT</span></td>
+                    <td><span class="badge green">Active</span></td>
+                    <td><button class="button danger small" data-revoke>Revoke</button></td>
+                </tr>
+                <tr>
+                    <td>Budget Report.pdf</td>
+                    <td>Arjun Rao<br><small>arjun@example.com</small></td>
+                    <td><span class="badge blue">READ</span></td>
+                    <td><span class="badge green">Active</span></td>
+                    <td><button class="button danger small" data-revoke>Revoke</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h2>Your documents</h2>
+            <p class="muted">Open a document to view its details.</p>
+        </div>
+    </div>
+
+    <div class="table-scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>DOCUMENT</th>
+                    <th>CATEGORY</th>
+                    <th>OWNER</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for document in documents %}
+                <tr>
+                    <td>{{ document.name }}</td>
+                    <td>{{ document.category }}</td>
+                    <td>{{ document.owner }}</td>
+                    <td><span class="badge green">{{ document.status }}</span></td>
+                    <td>
+                        <a href="/documents/{{ document.id }}" class="button primary small">Open</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="panel grant-panel">
+    <h2>Grant new access</h2>
+    <p class="muted">Select a document, registered user and permission.</p>
+
+    <form class="grant-form" data-demo-form>
+        <label>
+            Document
+            <select required>
+                <option value="">Select document</option>
+                {% for document in documents %}
+                <option>{{ document.name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label>User email
+            <input type="email" placeholder="person@example.com" required>
+        </label>
+
+        <label>Permission
+            <select>
+                <option>READ</option>
+                <option>EDIT</option>
+            </select>
+        </label>
+
+        <button class="button primary" type="submit">Grant access</button>
+        <p class="form-message" aria-live="polite"></p>
+    </form>
+</section>
+
+<p class="warning-note">
+    This is a frontend demonstration. Actual permission changes must be checked and recorded by the backend.
+</p>
+
+{% endblock %}
+```
