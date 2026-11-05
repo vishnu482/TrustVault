@@ -1,0 +1,30 @@
+TRUSTVAULT SAMPLE DOCUMENT
+
+Document Title: Office Equipment Usage Policy Document Owner: user1
+Category: General Version: 1
+
+1.  Purpose This document explains the basic rules for using office
+    equipment.
+
+2.  General Rules
+
+-   Use office equipment only for approved work-related activities.
+-   Handle computers, printers, and other equipment carefully.
+-   Keep equipment clean and report any damage.
+-   Do not install unauthorized software.
+
+3.  Reporting Problems If equipment stops working, notify the IT support
+    team. Include the equipment name, location, and a short description
+    of the problem.
+
+4.  Security
+
+-   Lock your computer when leaving your desk.
+-   Do not share your account password.
+-   Store important work documents in the approved secure workspace.
+
+i am demo user 
+there is no changes in the document
+you can proceed with it
+
+5.  Review This policy should be reviewed once every year.
