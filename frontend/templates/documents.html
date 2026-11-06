@@ -1,5 +1,5 @@
-```html
 {% extends "base.html" %}
+
 {% block title %}My documents | TrustVault{% endblock %}
 {% block breadcrumb %}My documents{% endblock %}
 
@@ -12,7 +12,7 @@
     <p class="muted">Manage your files and control who can access them.</p>
   </div>
 
-  <a class="button primary" href="/upload">＋ Upload document</a>
+  <a class="button primary" href="/upload">+ Upload document</a>
 </div>
 
 <section class="panel">
@@ -21,102 +21,55 @@
     <input
       id="documentSearch"
       class="search"
-      placeholder="⌕ Search documents..."
+      placeholder="Search documents..."
       aria-label="Search documents"
     >
-
-    <select>
-      <option>All categories</option>
-      <option>Projects</option>
-      <option>Finance</option>
-      <option>Research</option>
-    </select>
   </div>
 
   <div class="table-scroll">
     <table id="documentsTable">
-
       <thead>
         <tr>
           <th>DOCUMENT</th>
           <th>CATEGORY</th>
-          <th>LAST UPDATED</th>
+          <th>UPLOADED</th>
           <th>ACCESS</th>
-          <th>SIZE</th>
           <th>ACTION</th>
         </tr>
       </thead>
 
       <tbody>
-
+        {% for document in documents %}
         <tr>
           <td>
-            <span class="file-type pdf">PDF</span>
-            <b>Employee Policy.pdf</b>
+            <b>{{ document.name }}</b>
           </td>
 
-          <td>Policy</td>
-          <td>Oct 20, 2026</td>
+          <td>{{ document.category }}</td>
+
+          <td>{{ document.uploaded_at }}</td>
 
           <td>
-            <span class="badge green">Private</span>
+            {% if document.id %}
+              <span class="badge green">Private by default</span>
+            {% endif %}
           </td>
 
-          <td>—</td>
-
           <td>
-            <a class="button secondary" href="/documents/1">
+            <a class="button secondary"
+               href="/documents/{{ document.id }}">
               Open
             </a>
           </td>
         </tr>
-
+        {% else %}
         <tr>
-          <td>
-            <span class="file-type doc">DOC</span>
-            <b>Project Documentation.docx</b>
-          </td>
-
-          <td>Documentation</td>
-          <td>Oct 22, 2026</td>
-
-          <td>
-            <span class="badge blue">Shared</span>
-          </td>
-
-          <td>—</td>
-
-          <td>
-            <a class="button secondary" href="/documents/2">
-              Open
-            </a>
+          <td colspan="5" class="muted">
+            You haven't uploaded any documents yet.
           </td>
         </tr>
-
-        <tr>
-          <td>
-            <span class="file-type pdf">PDF</span>
-            <b>Security Guidelines.pdf</b>
-          </td>
-
-          <td>Security</td>
-          <td>Oct 25, 2026</td>
-
-          <td>
-            <span class="badge blue">Shared</span>
-          </td>
-
-          <td>—</td>
-
-          <td>
-            <a class="button secondary" href="/documents/3">
-              Open
-            </a>
-          </td>
-        </tr>
-
+        {% endfor %}
       </tbody>
-
     </table>
   </div>
 
@@ -127,4 +80,3 @@
 </section>
 
 {% endblock %}
-```
