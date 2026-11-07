@@ -7,3 +7,4 @@ passlib
 bcrypt
 Jinja2
 PyMuPDF
+python-docx
