@@ -1,46 +1,16 @@
-TRUSTVAULT FRONTEND
-
-Files:
-- templates/: Jinja2 HTML pages
-- static/css/style.css: website styling
-- static/js/app.js: menu, search, upload demo validation and demo messages
-
-IMPORTANT:
-This is a frontend starter with sample data. Forms and permission actions are not connected to real backend endpoints.
-The browser-side file checks are for user experience only. Repeat all validation and authorization on the FastAPI server.
-Do not expose the storage folder using StaticFiles or public URLs.
-
-FastAPI configuration example (in backend/app/main.py):
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parents[2]
-templates = Jinja2Templates(directory=str(BASE_DIR / "frontend" / "templates"))
-app.mount("/static", StaticFiles(directory=str(BASE_DIR / "frontend" / "static")), name="static")
-
-Template responses should pass request and any page data, for example:
-return templates.TemplateResponse(
-    request=request,
-    name="dashboard.html",
-    context={}
-)
-
-Create backend routes for /login, /register, /dashboard, /documents, /shared,
- /permissions, /audit, /admin, /profile, /upload, and /logout.
-# TrustVault – Frontend
+# TrustVault – Frontend Documentation
 
 ## 1. Project Overview
 
-TrustVault is a secure document-sharing platform designed to help users upload, organize, manage and share documents.
+TrustVault is a secure document management and sharing platform. Its frontend provides interfaces for users and administrators to manage documents, control access permissions, and monitor document-related activities.
 
-The frontend provides separate interfaces for normal users and administrators. It allows users to manage their documents and access permissions, while administrators can monitor users, documents, permissions and security activities.
+The frontend is built using HTML, CSS, JavaScript, and Jinja2 templates. It is integrated with the FastAPI backend to display application data and support user interactions.
 
 ## 2. Technologies Used
 
 - **HTML5** – Structure of web pages.
-- **CSS3** – Styling, layouts and responsive design.
-- **JavaScript** – Client-side interactions.
+- **CSS3** – Styling, layouts, and responsive design.
+- **JavaScript** – Client-side interactions and interface functionality.
 - **Jinja2** – Dynamic HTML rendering using backend data.
 - **FastAPI** – Backend integration and page routing.
 
@@ -76,34 +46,44 @@ frontend/
         └── app.js
 ```
 
+*This structure represents the frontend files; individual filenames may vary depending on the implementation.*
+
 ## 4. User Interface Modules
 
 ### Login and Registration
 - User login interface.
 - New user registration.
 - Form validation and error messages.
-- Authentication through the backend.
+- Authentication through the FastAPI backend.
 
 ### User Dashboard
-- Displays document overview.
+- Displays document overview and relevant statistics.
 - Shows document information.
-- Provides navigation to other workspace sections.
+- Provides navigation to workspace sections.
 
 ### Document Management
 - Displays available documents.
-- Shows document names, owners, categories and dates.
-- Provides document details and management navigation.
+- Shows document names, owners, categories, and upload dates.
+- Provides document details and management options.
+- Supports document preview and download based on permissions.
+
+### Document Upload
+- Provides an interface for uploading documents.
+- Supports the application's configured file formats.
+- Displays upload status and validation messages.
 
 ### Shared Documents
 - Displays documents shared with the logged-in user.
-- Helps users access shared resources.
+- Provides access to shared resources according to assigned permissions.
 
 ### Permission Management
 - Provides an interface for managing document access.
 - Supports READ and EDIT permission concepts.
+- Allows authorized users to manage sharing permissions.
 
 ### Audit Trail
-- Displays document and account activity information.
+- Displays recorded document and account activities.
+- Helps track important user actions.
 
 ### Profile
 - Displays user account information.
@@ -114,10 +94,10 @@ TrustVault provides a separate administrator interface with dedicated pages.
 
 | Module | Description |
 |---|---|
-| Admin Dashboard | Displays overall platform statistics and recent activity. |
-| User Management | Displays registered users and their document counts. |
+| Admin Dashboard | Displays platform statistics and recent activity. |
+| User Management | Displays registered users and account information. |
 | Document Management | Displays documents belonging to different users. |
-| Permission Management | Allows administrators to grant and revoke READ and EDIT access. |
+| Permission Management | Allows authorized administrators to manage READ and EDIT access. |
 | Audit Logs | Displays recorded security and administrative activities. |
 | Admin Profile | Displays administrator account information. |
 
@@ -132,57 +112,116 @@ The frontend uses CSS3 for:
 - Buttons and status indicators.
 - Responsive layouts for different screen sizes.
 
-The design uses a blue and white theme with a consistent visual style across the workspace and administrator pages.
+The design uses a consistent blue-and-white visual theme across the user workspace and administrator pages.
 
 ## 7. Backend Integration
 
-The frontend is integrated with the FastAPI backend.
+The frontend integrates with the FastAPI backend.
 
-Jinja2 templates receive dynamic information from backend routes and display it using template variables and loops.
+- Jinja2 templates receive dynamic information from backend routes.
+- Template variables and loops display database information.
+- CSS and JavaScript files are served through FastAPI static file mounting.
+- Form submissions and document operations are handled through backend routes.
+- Authentication and authorization are enforced on the server.
 
-Static CSS and JavaScript files are served through the backend static directory.
+### Static File Configuration
 
-## 8. How to Run the Project
+The frontend static directory is served through FastAPI.
 
-1. Open the TrustVault project folder.
-2. Start the backend using the terminal:
+Example configuration:
+
+```python
+from fastapi.staticfiles import StaticFiles
+
+app.mount(
+    "/static",
+    StaticFiles(directory=str(BASE_DIR / "frontend" / "static")),
+    name="static"
+)
+```
+
+### Template Rendering
+
+FastAPI uses Jinja2 to render frontend pages.
+
+Example:
+
+```python
+return templates.TemplateResponse(
+    request=request,
+    name="dashboard.html",
+    context={}
+)
+```
+
+## 8. Security Considerations
+
+- Frontend validation improves user experience but does not replace server-side validation.
+- Uploaded files must be validated on the FastAPI backend.
+- Authorization must be checked before document viewing, editing, sharing, or downloading.
+- Passwords and sensitive credentials must never be exposed in frontend code.
+- The document storage directory must not be exposed through public static URLs.
+- Protected documents must be delivered through authorized backend routes.
+
+## 9. How to Run the Project
+
+### 1. Open the Project Folder
+
+Open the TrustVault project directory in a terminal.
+
+### 2. Navigate to the Backend
 
 ```bash
 cd backend
+```
+
+### 3. Start the FastAPI Application
+
+```bash
 python -m uvicorn app.main:app --reload --port 8000
 ```
 
-3. Open the application in a browser:
+### 4. Open the Application
+
+Open the following URL in your browser:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-4. For administrator login, open:
+### 5. Administrator Login
+
+Open the administrator login page:
 
 ```text
 http://127.0.0.1:8000/admin/login
 ```
 
-## 9. Important Notes
+Administrator credentials are configured through environment variables. Demo-user credentials are documented in the main project README.
 
-- The frontend uses Jinja2 templates rendered by FastAPI.
-- The administrator interface is separated from the normal user interface.
-- Access control must be enforced by backend authorization checks.
-- The current project prototype uses in-memory data, so changes are not persistent after a server restart.
-- Actual document storage and secure file downloads require further backend implementation.
+## 10. Development Guidelines
 
-## 10. Future Enhancements
+- Follow modular frontend architecture.
+- Keep HTML templates organized.
+- Maintain consistent styling across pages.
+- Use JavaScript for client-side interactions.
+- Pass dynamic data through Jinja2 template contexts.
+- Validate all inputs on the backend.
+- Enforce authorization for protected operations.
+- Avoid exposing sensitive information.
+- Test important user and administrator workflows.
+
+## 11. Future Enhancements
 
 - Improve responsive design for mobile devices.
-- Add document preview functionality.
-- Improve frontend form validation.
-- Add search and filtering capabilities.
-- Integrate persistent database storage.
-- Improve accessibility and user experience.
+- Add advanced document search and filtering.
+- Improve accessibility.
+- Enhance document preview functionality.
+- Improve frontend loading and error states.
+- Add additional user-interface improvements.
 
 ---
 
 **Project Name:** TrustVault  
 **Module:** Frontend Development  
-**Technologies:** HTML,
+**Technologies:** HTML5, CSS3, JavaScript, Jinja2, FastAPI
