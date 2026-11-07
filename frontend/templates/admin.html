@@ -24,6 +24,7 @@
             position: fixed;
             inset: 0 auto 0 0;
             box-sizing: border-box;
+            z-index: 10;
         }
 
         .admin-brand {
@@ -51,6 +52,7 @@
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
+            transition: .2s ease;
         }
 
         .admin-nav a:hover,
@@ -74,6 +76,11 @@
             padding: 12px;
             border-radius: 8px;
             text-decoration: none;
+            transition: .2s ease;
+        }
+
+        .admin-logout a:hover {
+            background: #31549a;
         }
 
         .admin-content {
@@ -93,10 +100,12 @@
             margin: 0;
             color: #192238;
             font-size: 28px;
+            font-family: Manrope, sans-serif;
         }
 
         .admin-header p {
             color: #7b8497;
+            line-height: 1.6;
         }
 
         .admin-user,
@@ -108,6 +117,15 @@
             padding: 20px;
         }
 
+        .admin-user {
+            min-width: 150px;
+        }
+
+        .admin-user span {
+            color: #7b8497;
+            font-size: 12px;
+        }
+
         .admin-stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -115,22 +133,39 @@
             margin-bottom: 22px;
         }
 
+        .admin-stat {
+            transition: .2s ease;
+            box-shadow: 0 5px 20px #202c4a06;
+        }
+
+        .admin-stat:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(20, 43, 92, .08);
+        }
+
         .admin-stat-title {
             color: #7b8497;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .admin-stat-value {
             font-size: 30px;
             font-weight: 800;
             margin-top: 10px;
+            font-family: Manrope, sans-serif;
+            color: #192238;
         }
 
         .admin-panel {
             margin-bottom: 20px;
+            box-shadow: 0 5px 20px #202c4a06;
         }
 
         .admin-panel h2 {
             margin-top: 0;
+            color: #192238;
+            font: 700 17px Manrope, sans-serif;
         }
 
         .admin-table {
@@ -143,28 +178,256 @@
             text-align: left;
             padding: 13px;
             border-bottom: 1px solid #e8ebf2;
+            font-size: 12px;
         }
 
         .admin-table th {
             background: #f6f7fb;
+            color: #7b8497;
+            font-size: 10px;
+            letter-spacing: .7px;
         }
 
         .view-btn {
             display: inline-block;
-            padding: 7px 12px;
+            padding: 8px 13px;
             background: #4b5fe3;
             color: white;
             text-decoration: none;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: 700;
+            transition: .2s ease;
         }
 
         .view-btn:hover {
-            opacity: 0.85;
+            background: #3549c8;
+            transform: translateY(-1px);
         }
 
-        @media(max-width: 900px) {
+        /* PREMIUM DOCUMENT UPLOAD */
+
+        .upload-panel {
+            position: relative;
+            overflow: hidden;
+            padding: 28px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #ffffff 0%, #f9fbff 100%);
+            border: 1px solid #e5eaf3;
+            box-shadow: 0 8px 30px rgba(20, 43, 92, .045);
+        }
+
+        .upload-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .upload-eyebrow {
+            display: block;
+            color: #526fe0;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.7px;
+            margin-bottom: 9px;
+        }
+
+        .upload-heading h2 {
+            font: 800 21px Manrope, sans-serif;
+            color: #192238;
+            margin: 0 0 7px;
+        }
+
+        .upload-heading p {
+            color: #8490a5;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .upload-heading-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: #edf2ff;
+            color: #4264d8;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .upload-dropzone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 205px;
+            padding: 25px;
+            text-align: center;
+            border: 1.5px dashed #b9c7e3;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #f8faff, #f2f6ff);
+            cursor: pointer;
+            transition: all .25s ease;
+        }
+
+        .upload-dropzone:hover,
+        .upload-dropzone.dragging {
+            border-color: #4264d8;
+            background: #edf3ff;
+            box-shadow: inset 0 0 0 1px #4264d8;
+            transform: translateY(-2px);
+        }
+
+        .upload-dropzone input {
+            display: none;
+        }
+
+        .upload-cloud-icon {
+            width: 64px;
+            height: 64px;
+            display: grid;
+            place-items: center;
+            border-radius: 19px;
+            color: #4264d8;
+            background: #e4ecff;
+            margin-bottom: 15px;
+            transition: transform .25s ease;
+        }
+
+        .upload-dropzone:hover .upload-cloud-icon {
+            transform: translateY(-4px);
+        }
+
+        .dropzone-title {
+            color: #26344e;
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .dropzone-subtitle {
+            color: #8994a8;
+            font-size: 12px;
+        }
+
+        .dropzone-subtitle span {
+            color: #4264d8;
+            font-weight: 800;
+        }
+
+        .file-format-info {
+            margin-top: 18px;
+            color: #9aa5b7;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .selected-file {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            min-height: 43px;
+            margin-top: 13px;
+            padding: 9px 13px;
+            border-radius: 9px;
+            background: #f5f7fb;
+            color: #59667c;
+            font-size: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .selected-file-icon {
+            font-size: 18px;
+        }
+
+        .upload-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 19px;
+        }
+
+        .upload-security {
+            color: #8792a5;
+            font-size: 11px;
+        }
+
+        .upload-security span {
+            color: #1b9b70;
+            margin-right: 5px;
+        }
+
+        .upload-btn {
+            border: 0;
+            border-radius: 9px;
+            padding: 13px 20px;
+            background: linear-gradient(135deg, #3156c9, #526fe8);
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 800;
+            box-shadow: 0 5px 13px rgba(66, 100, 216, .2);
+            transition: all .2s ease;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(66, 100, 216, .3);
+        }
+
+        .upload-btn span {
+            margin-left: 9px;
+            font-size: 16px;
+        }
+
+        .upload-links {
+            display: flex;
+            gap: 22px;
+            margin-top: 22px;
+            padding-top: 17px;
+            border-top: 1px solid #edf0f5;
+        }
+
+        .upload-links a {
+            color: #5269cb;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .upload-links a:hover {
+            color: #203e9d;
+        }
+
+        /* SHORTCUTS */
+
+        .shortcut-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .recent-activity-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #edf0f5;
+            color: #59667c;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .recent-activity-item:last-child {
+            border-bottom: 0;
+        }
+
+        .recent-activity-item small {
+            color: #9aa2b1;
+        }
+
+        @media(max-width: 1100px) {
             .admin-stats {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -182,6 +445,30 @@
 
             .admin-stats {
                 grid-template-columns: 1fr;
+            }
+
+            .admin-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .upload-panel {
+                padding: 18px;
+            }
+
+            .upload-footer {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .upload-btn {
+                width: 100%;
+            }
+
+            .upload-links {
+                flex-wrap: wrap;
+                gap: 12px;
             }
         }
     </style>
@@ -203,34 +490,22 @@
 
         <nav class="admin-nav">
 
-            <a class="active" href="/admin">
-                Dashboard
-            </a>
+            <a class="active" href="/admin">Dashboard</a>
 
-            <a href="/admin/users">
-                User Management
-            </a>
+            <a href="/admin/users">User Management</a>
 
-            <a href="/admin/documents">
-                Documents
-            </a>
+            <a href="/admin/documents">Documents</a>
 
-            <a href="/admin/permissions">
-                Permissions
-            </a>
+            <a href="/admin/permissions">Permissions</a>
 
-            <a href="/admin/audit">
-                Audit Logs
-            </a>
+            <a href="/admin/audit">Audit Logs</a>
 
-            <a href="/admin/profile">
-                Profile
-            </a>
+            <a href="/admin/profile">Profile</a>
 
         </nav>
 
         <div class="admin-logout">
-            <a href="/logout">Logout</a>
+            <a href="/admin/logout">Logout</a>
         </div>
 
     </aside>
@@ -253,12 +528,9 @@
             </div>
 
             <div class="admin-user">
-
                 <strong>{{ user.name }}</strong>
                 <br>
-
                 <span>Administrator</span>
-
             </div>
 
         </div>
@@ -269,57 +541,140 @@
         <div class="admin-stats">
 
             <div class="admin-stat">
-
-                <div class="admin-stat-title">
-                    Total Users
-                </div>
-
-                <div class="admin-stat-value">
-                    {{ total_users }}
-                </div>
-
+                <div class="admin-stat-title">Total Users</div>
+                <div class="admin-stat-value">{{ total_users }}</div>
             </div>
 
-
             <div class="admin-stat">
-
-                <div class="admin-stat-title">
-                    Total Documents
-                </div>
-
-                <div class="admin-stat-value">
-                    {{ total_documents }}
-                </div>
-
+                <div class="admin-stat-title">Total Documents</div>
+                <div class="admin-stat-value">{{ total_documents }}</div>
             </div>
 
-
             <div class="admin-stat">
-
-                <div class="admin-stat-title">
-                    Active Documents
-                </div>
-
-                <div class="admin-stat-value">
-                    {{ active_documents }}
-                </div>
-
+                <div class="admin-stat-title">Active Documents</div>
+                <div class="admin-stat-value">{{ active_documents }}</div>
             </div>
 
-
             <div class="admin-stat">
-
-                <div class="admin-stat-title">
-                    Active Permissions
-                </div>
-
-                <div class="admin-stat-value">
-                    {{ total_permissions }}
-                </div>
-
+                <div class="admin-stat-title">Active Permissions</div>
+                <div class="admin-stat-value">{{ total_permissions }}</div>
             </div>
 
         </div>
+
+
+        <!-- PREMIUM DOCUMENT UPLOAD -->
+
+        <section class="admin-panel upload-panel">
+
+            <div class="upload-heading">
+
+                <div>
+                    <span class="upload-eyebrow">DOCUMENT CONTROL</span>
+
+                    <h2>Upload a document</h2>
+
+                    <p>
+                        Securely add a document to the TrustVault repository.
+                    </p>
+                </div>
+
+                <div class="upload-heading-icon">↥</div>
+
+            </div>
+
+
+            <form
+                action="/admin/documents/upload"
+                method="POST"
+                enctype="multipart/form-data"
+                id="adminUploadForm"
+            >
+
+                <label class="upload-dropzone" for="adminFile">
+
+                    <input
+                        type="file"
+                        name="file"
+                        id="adminFile"
+                        accept=".pdf,.docx,.txt,.csv"
+                        required
+                    >
+
+                    <div class="upload-cloud-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="34"
+                            height="34"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M12 16V4"></path>
+                            <path d="m7 9 5-5 5 5"></path>
+                            <path d="M20 16.5v2A1.5 1.5 0 0 1 18.5 20h-13A1.5 1.5 0 0 1 4 18.5v-2"></path>
+                        </svg>
+
+                    </div>
+
+                    <div class="dropzone-title">
+                        Drag and drop your file here
+                    </div>
+
+                    <div class="dropzone-subtitle">
+                        or <span>browse files</span> from your computer
+                    </div>
+
+                    <div class="file-format-info">
+                        PDF &nbsp;·&nbsp; DOCX &nbsp;·&nbsp; TXT &nbsp;·&nbsp; CSV
+                    </div>
+
+                </label>
+
+
+                <div class="selected-file">
+
+                    <span class="selected-file-icon">📄</span>
+
+                    <span id="selectedFileName">
+                        No file selected
+                    </span>
+
+                </div>
+
+
+                <div class="upload-footer">
+
+                    <div class="upload-security">
+                        <span>●</span>
+                        Secure document upload
+                    </div>
+
+                    <button type="submit" class="upload-btn">
+                        Upload Document <span>→</span>
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <div class="upload-links">
+
+                <a href="/admin/documents">
+                    Manage Documents →
+                </a>
+
+                <a href="/admin/permissions">
+                    Share Documents →
+                </a>
+
+            </div>
+
+        </section>
 
 
         <!-- DOCUMENT ACTIVITY -->
@@ -333,7 +688,6 @@
                 <table class="admin-table">
 
                     <thead>
-
                         <tr>
                             <th>Document</th>
                             <th>Owner</th>
@@ -342,7 +696,6 @@
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
-
                     </thead>
 
                     <tbody>
@@ -364,7 +717,8 @@
                             <td>
                                 <a
                                     class="view-btn"
-                                    href="/admin/documents/{{ document.id }}/view">
+                                    href="/admin/documents/{{ document.id }}/view"
+                                >
                                     View
                                 </a>
                             </td>
@@ -394,24 +748,28 @@
 
         <div class="admin-panel">
 
-            <h2>Administration shortcuts</h2>
+            <h2>Administration Shortcuts</h2>
 
             <p>
                 Manage user accounts, grant or revoke document access,
                 and review activity.
             </p>
 
-            <a class="view-btn" href="/admin/users">
-                Manage Users
-            </a>
+            <div class="shortcut-buttons">
 
-            <a class="view-btn" href="/admin/permissions">
-                Manage Permissions
-            </a>
+                <a class="view-btn" href="/admin/users">
+                    Manage Users
+                </a>
 
-            <a class="view-btn" href="/admin/audit">
-                View Audit Logs
-            </a>
+                <a class="view-btn" href="/admin/permissions">
+                    Manage Permissions
+                </a>
+
+                <a class="view-btn" href="/admin/audit">
+                    View Audit Logs
+                </a>
+
+            </div>
 
         </div>
 
@@ -424,7 +782,8 @@
 
             {% for item in recent_activity %}
 
-                <p>
+                <div class="recent-activity-item">
+
                     <b>{{ item.action }}</b>
                     — {{ item.actor }}
                     — {{ item.target }}
@@ -432,7 +791,8 @@
                     <small>
                         ({{ item.time }})
                     </small>
-                </p>
+
+                </div>
 
             {% else %}
 
@@ -445,6 +805,49 @@
     </main>
 
 </div>
+
+
+<!-- UPLOAD JAVASCRIPT -->
+
+<script>
+    const fileInput = document.getElementById("adminFile");
+    const dropzone = document.querySelector(".upload-dropzone");
+    const fileName = document.getElementById("selectedFileName");
+
+    function showFile(file) {
+        if (file) {
+            fileName.textContent = file.name;
+        } else {
+            fileName.textContent = "No file selected";
+        }
+    }
+
+    fileInput.addEventListener("change", function () {
+        showFile(this.files[0]);
+    });
+
+    dropzone.addEventListener("dragover", function (event) {
+        event.preventDefault();
+        dropzone.classList.add("dragging");
+    });
+
+    dropzone.addEventListener("dragleave", function () {
+        dropzone.classList.remove("dragging");
+    });
+
+    dropzone.addEventListener("drop", function (event) {
+        event.preventDefault();
+
+        dropzone.classList.remove("dragging");
+
+        const files = event.dataTransfer.files;
+
+        if (files.length > 0) {
+            fileInput.files = files;
+            showFile(files[0]);
+        }
+    });
+</script>
 
 </body>
 </html>
