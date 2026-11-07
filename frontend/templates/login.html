@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,6 +81,7 @@
             font-size: 15px;
             font-weight: 700;
             cursor: pointer;
+            transition: background 0.2s;
         }
 
         .login-btn:hover {
@@ -122,70 +122,8 @@
             font-weight: 600;
         }
 
-        .demo-section {
-            margin-top: 28px;
-            border-top: 1px solid #e8eaf0;
-            padding-top: 22px;
-        }
-
-        .demo-section h3 {
-            text-align: center;
-            color: #192238;
-            font-size: 17px;
-            margin: 0 0 6px;
-        }
-
-        .demo-description {
-            text-align: center;
-            color: #7b8497;
-            font-size: 13px;
-            margin: 0 0 16px;
-        }
-
-        .demo-card {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            text-align: left;
-            background: #fff;
-            border: 1px solid #dfe3ec;
-            border-radius: 9px;
-            padding: 13px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .demo-card:hover {
-            border-color: #4b5fe3;
-            background: #f7f8ff;
-        }
-
-        .demo-card.selected {
-            border-color: #4b5fe3;
-            background: #f0f2ff;
-        }
-
-        .demo-card strong {
-            display: block;
-            color: #192238;
-            font-size: 14px;
-        }
-
-        .demo-card small {
-            display: block;
-            color: #7b8497;
-            margin-top: 4px;
-            font-size: 12px;
-        }
-
-        .demo-card .select-label {
+        .admin-link a:hover {
             color: #4b5fe3;
-            font-size: 12px;
-            font-weight: bold;
-            white-space: nowrap;
         }
 
         @media (max-width: 480px) {
@@ -241,64 +179,6 @@
 
     </form>
 
-    <div class="demo-section">
-
-        <h3>Try TrustVault Demo</h3>
-
-        <p class="demo-description">
-            Select an account to continue.
-        </p>
-
-        <!-- Demo Admin -->
-        <button
-            type="button"
-            class="demo-card"
-            data-username="demo_admin"
-            data-password="DemoAdmin@123"
-            data-role="administrator"
-        >
-            <span>
-                <strong>Admin</strong>
-                <small>Demo Admin</small>
-            </span>
-
-            <span class="select-label">Select →</span>
-        </button>
-
-        <!-- Demo Owner -->
-        <button
-            type="button"
-            class="demo-card"
-            data-username="demo_owner"
-            data-password="DemoOwner@123"
-            data-role="document_owner"
-        >
-            <span>
-                <strong>Vishal</strong>
-                <small>Demo Owner</small>
-            </span>
-
-            <span class="select-label">Select →</span>
-        </button>
-
-        <!-- Demo Viewer -->
-        <button
-            type="button"
-            class="demo-card"
-            data-username="demo_viewer"
-            data-password="DemoViewer@123"
-            data-role="viewer"
-        >
-            <span>
-                <strong>Rahul</strong>
-                <small>Demo Viewer</small>
-            </span>
-
-            <span class="select-label">Select →</span>
-        </button>
-
-    </div>
-
     <div class="create-link">
         Don't have an account?
         <a href="/register">Create Account</a>
@@ -309,42 +189,6 @@
     </div>
 
 </div>
-
-<script>
-    const demoCards = document.querySelectorAll(".demo-card");
-
-    const usernameInput = document.getElementById("username");
-    const passwordInput = document.getElementById("password");
-
-    demoCards.forEach(card => {
-
-        card.addEventListener("click", function () {
-
-            const username = this.dataset.username;
-            const password = this.dataset.password;
-            const role = this.dataset.role;
-
-            // Demo Admin opens the separate administrator login page.
-            if (role === "administrator") {
-                window.location.href = "/admin/login?demo=1";
-                return;
-            }
-
-            // Owner and Viewer fill the normal login form.
-            usernameInput.value = username;
-            passwordInput.value = password;
-
-            demoCards.forEach(item => {
-                item.classList.remove("selected");
-            });
-
-            this.classList.add("selected");
-
-            usernameInput.focus();
-        });
-
-    });
-</script>
 
 </body>
 </html>
