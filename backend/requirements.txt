@@ -6,3 +6,4 @@ python-dotenv
 passlib
 bcrypt
 Jinja2
+PyMuPDF
