@@ -26,12 +26,8 @@ def authenticate(username, password):
     user = dict(user)
     stored_password = user["password_hash"]
 
-    # Support existing PBKDF2 user passwords
-    if "$" in stored_password:
-        valid = verify_password(password, stored_password)
-
-    # Support the existing administrator bcrypt password
-    else:
+    # Check whether the stored password is a bcrypt hash
+    if stored_password.startswith(("$2a$", "$2b$", "$2y$")):
         try:
             valid = bcrypt_context.verify(
                 password,
@@ -39,5 +35,9 @@ def authenticate(username, password):
             )
         except Exception:
             valid = False
+
+    # Otherwise, verify it as a PBKDF2 hash
+    else:
+        valid = verify_password(password, stored_password)
 
     return user if valid else None
