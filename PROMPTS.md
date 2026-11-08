@@ -61,7 +61,35 @@ Develop a responsive frontend for TrustVault using HTML, CSS, JavaScript, and Ji
 **Prompt:**
 
 Analyze the FastAPI application for errors involving authentication, session management, database connectivity, file uploads, permissions, and document processing. Identify the root cause and recommend fixes without bypassing security controls.
+## 11. Administrator Account Management
 
+**Prompt:**
+
+Update TrustVault administrator account management. Remove the `demo_admin` account from the database and prevent it from being recreated during database initialization. Maintain the existing primary administrator account and configure administrator credentials through environment variables. Ensure that administrator authentication and existing access permissions continue to work correctly.
+
+## 12. Login Page Improvements
+
+**Prompt:**
+
+Update the TrustVault login page by removing demo-user credential cards and their associated JavaScript functionality. Maintain the existing login page design, username and password fields, error messages, registration link, and administrator login link. Ensure that normal user authentication continues to work correctly.
+
+## 13. Demo Account Management
+
+**Prompt:**
+
+Maintain the `demo_owner` and `demo_viewer` accounts for application testing. Preserve their existing roles, passwords, document permissions, and access restrictions. Ensure that the removed `demo_admin` account is not recreated.
+
+## 14. Documentation Updates
+
+**Prompt:**
+
+Update the TrustVault README documentation to include the project overview, features, technology stack, installation instructions, administrator environment variable configuration, and demo-user login credentials. Keep the administrator password private and avoid publishing sensitive credentials in the repository.
+
+## 15. Deployment Preparation
+
+**Prompt:**
+
+Prepare TrustVault for deployment on Render. Verify application configuration, environment variables, database initialization, authentication, document storage, and required dependencies. Ensure that recent code changes do not break existing functionality and test important user and administrator workflows before deployment.
 ## Development Guidelines
 
 - Follow modular application architecture.

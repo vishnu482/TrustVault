@@ -1,23 +1,22 @@
-# TrustVault
+# TrustVault – Secure Document Management System
 
-## Secure Document Management System
+TrustVault is a secure document management application that allows users to upload, store, manage, share, and access documents based on role-based permissions.
 
-TrustVault is a web-based document management application designed to provide centralized document storage, access control, document sharing, version management, and PDF editing capabilities.
+The application provides separate access for administrators, document owners, and viewers. It also supports document versioning, audit logging, and permission-based document operations.
 
-The application allows users to upload, manage, preview, download, and edit documents through a simple web interface.
+## Features
 
-## Key Features
-
-- **User Authentication:** User registration, login, and logout.
-- **Role-Based Access Control:** Access permissions based on user roles.
-- **Document Upload:** Upload PDF, DOC, DOCX, TXT, and CSV files.
-- **Document Management:** View and manage uploaded documents.
-- **Document Sharing:** Share documents with authorized users.
-- **Version Management:** Maintain document versions and modification history.
-- **PDF Editing:** Add text, comments, highlights, signatures, shapes, and images to PDF documents.
-- **Document Preview:** Preview supported documents within the application.
-- **Document Download:** Download original and latest document versions.
-- **Audit Logging:** Record important user and document activities.
+- User registration and login
+- Administrator login and dashboard
+- Role-Based Access Control (RBAC)
+- Secure document upload and storage
+- Document sharing between users
+- Read and Edit permissions
+- Document preview and download
+- Document version management
+- PDF document editing
+- Audit logs to track user activities
+- Separate access for administrators, document owners, and viewers
 
 ## Technology Stack
 
@@ -38,11 +37,6 @@ The application allows users to upload, manage, preview, download, and edit docu
 - PyMuPDF
 - python-docx
 
-### Authentication and Security
-- Session-based authentication
-- Password hashing
-- Role-based access control
-
 ## Project Structure
 
 ```text
@@ -53,10 +47,9 @@ TrustVault/
 │   │   ├── core/
 │   │   ├── routes/
 │   │   ├── services/
-│   │   └── main.py
+│   │   ├── main.py
+│   │   └── database.py
 │   │
-│   ├── data/
-│   ├── uploads/
 │   └── requirements.txt
 │
 ├── frontend/
@@ -64,80 +57,157 @@ TrustVault/
 │   └── static/
 │
 ├── README.md
-├── PROMPTS.md
-└── THREATS.md
+└── ...
 ```
+
+*This is a simplified overview of the project structure.*
 
 ## Installation and Setup
 
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/vishnu482/TrustVault.git
+```
+
+### 2. Navigate to the Project Folder
+
+```bash
 cd TrustVault
 ```
 
-### 2. Create a Virtual Environment
+### 3. Create a Virtual Environment
 
 ```bash
-python -m venv venv
+python -m venv .venv
 ```
 
-Activate it on Windows:
+### 4. Activate the Virtual Environment
+
+**Windows:**
+
+```powershell
+.venv\Scripts\activate
+```
+
+**Linux / macOS:**
 
 ```bash
-venv\Scripts\activate
+source .venv/bin/activate
 ```
 
-### 3. Install Dependencies
+### 5. Install Dependencies
 
 ```bash
 pip install -r backend/requirements.txt
 ```
 
-### 4. Start the Application
+## Administrator Login
+| Username | Password | Role |
+| `admin`  |`Admin@12345`|Administrator|
 
-Run the following command from the project root:
+Configure the administrator credentials before starting the application.
+
+**Windows PowerShell:**
+
+```powershell
+$env:TRUSTVAULT_ADMIN_USERNAME="admin"
+$env:TRUSTVAULT_ADMIN_PASSWORD="your_admin_password"
+$env:TRUSTVAULT_ADMIN_NAME="Administrator"
+```
+
+**Linux / macOS:**
+
+```bash
+export TRUSTVAULT_ADMIN_USERNAME="admin"
+export TRUSTVAULT_ADMIN_PASSWORD="your_admin_password"
+export TRUSTVAULT_ADMIN_NAME="Administrator"
+```
+
+For deployment, configure these variables in your hosting platform's environment settings.
+
+**Security note:** Do not commit the actual administrator password to GitHub. The password should remain private.
+
+## Demo User Credentials
+
+The following demo accounts are available for testing.
+
+| Username | Password | Role |
+| `demo_owner` | `DemoOwner@123` | Document Owner |
+| `demo_viewer` | `DemoViewer@123` | Viewer |
+
+**Note:** Demo accounts are intended for testing purposes only.
+
+## Login Credentials
+
+The following accounts are available for accessing TrustVault.
+
+| Username | Password | Role |
+| `admin` | `Admin@12345` | Administrator |
+| `demo_owner` | `DemoOwner@123` | Document Owner |
+| `demo_viewer` | `DemoViewer@123` | Viewer |
+
+## User Roles and Permissions
+
+TrustVault uses Role-Based Access Control (RBAC) to manage document access.
+
+| Role | Permissions |
+|---|---|
+| Administrator | Manage users, documents, permissions, and application activities |
+| Document Owner | Upload, manage, edit, and share owned documents |
+| Viewer | View and download documents when permission is granted |
+
+### Demo Document Permissions
+
+| Document Type | Permission |
+|---|---|
+| PDF | Read |
+| TXT | Edit |
+| DOCX | No access |
+| CSV | No access |
+
+Access depends on the permissions assigned to each user and document.
+
+## Running the Application
+
+From the project root directory, run:
 
 ```bash
 python -m uvicorn backend.app.main:app --reload --port 8000
 ```
 
-### 5. Open the Application
-
-Visit:
+Open the application in your browser:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-## Supported File Formats
+## Security
 
-- PDF
-- DOC
-- DOCX
-- TXT
-- CSV
-
-Maximum upload size: 10 MB (as configured in the backend).
-
-## Security Considerations
-
-- Protect user credentials and session information.
-- Validate uploaded file types and sizes.
-- Enforce authorization before document access and modification.
-- Do not expose database files, uploaded documents, or secret configuration values in public repositories.
-- Review the threat model in `THREATS.md`.
+- Passwords are stored as hashes rather than plain text.
+- Role-based permissions control document access.
+- Users can access documents according to their assigned permissions.
+- Audit logs help track important user activities.
+- Administrator credentials are configured through environment variables.
+- Use HTTPS in production.
+- Configure persistent storage for the database and uploaded documents.
+- Change default demo passwords or disable demo accounts when they are not needed.
 
 ## Future Enhancements
 
-- Multi-factor authentication.
-- Stronger document encryption and key management.
-- Cloud-based document storage.
-- Advanced document search.
-- Improved activity monitoring.
-- Automated security testing.
+- Cloud-based document storage
+- Multi-factor authentication
+- Advanced document search
+- Improved document activity reports
+- Additional file format support
+- Enhanced security and monitoring
+
+## Author
+
+**Vishnu Kanigelpula**
+
+GitHub: https://github.com/vishnu482
 
 ## License
 
-Specify the license applicable to this project before distributing it.
+This project is developed for educational and demonstration purposes.
