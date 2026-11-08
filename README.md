@@ -4,6 +4,9 @@ TrustVault is a secure document management application that allows users to uplo
 
 The application provides separate access for administrators, document owners, and viewers. It also supports document versioning, audit logging, and permission-based document operations.
 
+## Live URL
+https://trustvault-y2ew.onrender.com
+
 ## Features
 
 - User registration and login
@@ -212,8 +215,6 @@ http://127.0.0.1:8000
 ## Author
 
 **Vishnu Kanigelpula**
-
-GitHub: https://github.com/vishnu482
 
 ## License
 
