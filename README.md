@@ -103,8 +103,12 @@ pip install -r backend/requirements.txt
 ```
 
 ## Administrator Login
-| Username | Password | Role |
-| `admin`  |`Admin@12345`|Administrator|
+Administrator Login
+| Field | Value |
+|---|---|
+| Username | `admin` |
+| Password | `Admin@12345` |
+| Role | Administrator |
 
 Configure the administrator credentials before starting the application.
 
@@ -133,16 +137,19 @@ For deployment, configure these variables in your hosting platform's environment
 The following demo accounts are available for testing.
 
 | Username | Password | Role |
+|---|---|---|
 | `demo_owner` | `DemoOwner@123` | Document Owner |
 | `demo_viewer` | `DemoViewer@123` | Viewer |
+
 
 **Note:** Demo accounts are intended for testing purposes only.
 
 ## Login Credentials
 
-The following accounts are available for accessing TrustVault.
+The following table contains the administrator and demo-user login details.
 
 | Username | Password | Role |
+|---|---|---|
 | `admin` | `Admin@12345` | Administrator |
 | `demo_owner` | `DemoOwner@123` | Document Owner |
 | `demo_viewer` | `DemoViewer@123` | Viewer |
